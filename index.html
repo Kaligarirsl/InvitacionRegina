@@ -92,7 +92,7 @@
         <p id="contador">Personas confirmadas: 0</p>
     </div>
 
-    <script>
+        <script>
         let contador = 0;
 
         function confirmarAsistencia() {
@@ -102,10 +102,45 @@
             if (asistentes > 0) {
                 contador += asistentes;
                 document.getElementById('contador').innerText = `Personas confirmadas: ${contador}`;
-                alert("¡Gracias por confirmar tu asistencia!");
+                
+                // Enviar datos al script de Google Apps
+                const url = "https://script.google.com/macros/s/AKfycbxu2S9Mix_gY0lmy4hQPJoo4RrIcJBHF8wBUQgOT0ALcxlB0P2LOj4ObTPuSCvq3yvE/exec";
+                const params = {
+                    method: "POST",
+                    body: new URLSearchParams({
+                        asistentes: asistentes,
+                        nombre: nombre
+                    })
+                };
+                fetch(url, params)
+                    .then(response => response.json())
+                    .then(data => {
+                        alert("¡Gracias por confirmar tu asistencia!");
+                    })
+                    .catch(error => {
+                        alert("Hubo un error al enviar los datos.");
+                    });
             } else {
                 alert('Por favor ingresa un número válido de asistentes.');
             }
+        }
+
+      function generarPDF(nombre, asistentes) {
+            const contenido = `Invitación Baby Shower - Regina Sofía\n\n` +
+                              `Estimado/a ${nombre},\n\n` +
+                              `Gracias por confirmar tu asistencia con ${asistentes} persona(s).\n\n` +
+                              `Instrucciones para el evento:\n` +
+                              `1.- Los invitados pueden ingresar 15 min antes de la 13:00hrs\n` +
+                              `2.- La salida será máximo 20 min después de las 18:00hrs\n` +
+                              `3.- El estacionamiento tiene un costo de $60\n` +
+                              `4.- El acceso a los juegos es libre, así como a los inflables y mini campo de futbol\n\n` +
+                              `¡Nos vemos pronto!`;
+
+            const blob = new Blob([contenido], { type: 'application/pdf' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `Invitacion_${nombre}.pdf`;
+            link.click();
         }
 
         function crearBurbujas() {
