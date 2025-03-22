@@ -116,6 +116,8 @@
                     .then(response => response.json())
                     .then(data => {
                         alert("¡Gracias por confirmar tu asistencia!");
+                        generarPDF(nombre, asistentes);
+
                     })
                     .catch(error => {
                         alert("Hubo un error al enviar los datos.");
