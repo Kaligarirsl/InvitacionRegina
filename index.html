@@ -103,7 +103,7 @@
 
             if (asistentes > 0) {
                 contador += asistentes;
-                document.getElementById('contador').innerText = Personas confirmadas: ${contador};
+                document.getElementById('contador').innerText = `Personas confirmadas: ${contador}`;
                 
                 // Enviar datos al script de Google Apps
                 const url = "https://script.google.com/macros/s/AKfycbxu2S9Mix_gY0lmy4hQPJoo4RrIcJBHF8wBUQgOT0ALcxlB0P2LOj4ObTPuSCvq3yvE/exec";
@@ -129,7 +129,7 @@
             }
         }
 
-     function generarPDF(nombre, asistentes) {
+function generarPDF(nombre, asistentes) {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
 
@@ -177,15 +177,16 @@
     imagenCargada.src = imagen.src;
 }
 
+
         function crearBurbujas() {
             for (let i = 0; i < 50; i++) {
                 const burbuja = document.createElement('div');
                 burbuja.classList.add('burbuja');
-                burbuja.style.width = ${Math.random() * 40 + 10}px;
+                burbuja.style.width = `${Math.random() * 40 + 10}px`;
                 burbuja.style.height = burbuja.style.width;
-                burbuja.style.left = ${Math.random() * 100}vw;
-                burbuja.style.animationDuration = ${Math.random() * 10 + 5}s;
-                burbuja.style.backgroundColor = rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, 0.8);
+                burbuja.style.left = `${Math.random() * 100}vw`;
+                burbuja.style.animationDuration = `${Math.random() * 10 + 5}s`;
+                burbuja.style.backgroundColor = `rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, 0.8)`;
                 document.body.appendChild(burbuja);
             }
         }
