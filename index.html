@@ -134,15 +134,15 @@ function generarPDF(nombre, asistentes) {
     const doc = new jsPDF();
 
     // Configurar los márgenes del PDF
-    const margenIzquierdo = 15;
     const margenSuperior = 10;
+    const margenIzquierdo = (doc.internal.pageSize.width - 60) / 2; // Centrar la imagen en la página
 
     // Agregar la imagen (se puede cargar desde una URL)
     const imagen = document.querySelector('.imagen-personalizada');
     const imagenCargada = new Image();
 
     imagenCargada.onload = function () {
-        // Agregar la imagen con dimensiones ajustadas
+        // Agregar la imagen centrada
         const imagenAncho = 60;
         const imagenAlto = 60;
         doc.addImage(imagenCargada, 'WEBP', margenIzquierdo, margenSuperior, imagenAncho, imagenAlto);
@@ -151,29 +151,29 @@ function generarPDF(nombre, asistentes) {
         doc.setFont("Helvetica", "bold");
         doc.setFontSize(18);
         doc.setTextColor(214, 139, 49);  // Color cálido similar al de la invitación
-        doc.text("¡Estás Invitado al Baby Shower de Regina Sofía!", margenIzquierdo + imagenAncho + 10, margenSuperior + 10);
+        doc.text("¡Estás Invitado al Baby Shower de Regina Sofía!", margenIzquierdo, margenSuperior + imagenAlto + 10);
 
         // Datos de la invitación con color y estilo
         doc.setFont("Helvetica", "normal");
         doc.setFontSize(14);
         doc.setTextColor(0, 0, 0);  // Color negro para el texto
-        doc.text(`Nombre: ${nombre}`, margenIzquierdo, margenSuperior + 30);
-        doc.text(`Número de Asistentes: ${asistentes}`, margenIzquierdo, margenSuperior + 40);
+        doc.text(`Nombre: ${nombre}`, margenIzquierdo, margenSuperior + imagenAlto + 30);
+        doc.text(`Número de Asistentes: ${asistentes}`, margenIzquierdo, margenSuperior + imagenAlto + 40);
 
         // Sección de instrucciones con numeración
         doc.setFontSize(12);
         doc.setTextColor(0, 0, 0);
-        doc.text("Instrucciones para el día del evento:", margenIzquierdo, margenSuperior + 50);
-        doc.text("1. Los invitados pueden ingresar 15 min antes de las 13:00hrs", margenIzquierdo, margenSuperior + 60);
-        doc.text("2. La salida será máximo 20 min después de las 18:00hrs", margenIzquierdo, margenSuperior + 70);
-        doc.text("3. El estacionamiento tiene un costo de $60", margenIzquierdo, margenSuperior + 80);
-        doc.text("4. El acceso a los juegos es libre, así como a los inflables y mini campo de futbol", margenIzquierdo, margenSuperior + 90);
+        doc.text("Instrucciones para el día del evento:", margenIzquierdo, margenSuperior + imagenAlto + 50);
+        doc.text("1. Los invitados pueden ingresar 15 min antes de las 13:00hrs", margenIzquierdo, margenSuperior + imagenAlto + 60);
+        doc.text("2. La salida será máximo 20 min después de las 18:00hrs", margenIzquierdo, margenSuperior + imagenAlto + 70);
+        doc.text("3. El estacionamiento tiene un costo de $60", margenIzquierdo, margenSuperior + imagenAlto + 80);
+        doc.text("4. El acceso a los juegos es libre, así como a los inflables y mini campo de futbol", margenIzquierdo, margenSuperior + imagenAlto + 90);
 
         // Datos adicionales con un pequeño borde decorativo
         doc.setFontSize(12);
         doc.setTextColor(100, 100, 100);  // Gris suave
-        doc.text("Te esperamos el 18 de Mayo del 2025 de 13:00 a las 18:00 hrs.", margenIzquierdo, margenSuperior + 100);
-        doc.text("Ubicación: Ver en Google Maps: https://maps.app.goo.gl/gx2aHk5RRhphrE239", margenIzquierdo, margenSuperior + 110);
+        doc.text("Te esperamos el 18 de Mayo del 2025 de 13:00 a las 18:00 hrs.", margenIzquierdo, margenSuperior + imagenAlto + 100);
+        doc.text("Ubicación: Ver en Google Maps: https://maps.app.goo.gl/gx2aHk5RRhphrE239", margenIzquierdo, margenSuperior + imagenAlto + 110);
 
         // Agregar borde decorativo
         doc.setLineWidth(2);
@@ -187,7 +187,6 @@ function generarPDF(nombre, asistentes) {
     // Establecer la fuente de la imagen a cargar
     imagenCargada.src = imagen.src;
 }
-
 
         function crearBurbujas() {
             for (let i = 0; i < 50; i++) {
