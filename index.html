@@ -77,7 +77,7 @@
         }
     </style>
 </head>
-<body>
+<body onload="reproducirSonido()>
     <div class="invitacion">
         <img src="1.webp" class="imagen-personalizada">
 
@@ -91,7 +91,11 @@
         <button class="boton" onclick="confirmarAsistencia()">Confirmar Asistencia</button>
         <p id="contador">Personas confirmadas: 0</p>
     </div>
-
+<!-- Audio de fondo -->
+    <audio id="audio" loop>
+        <source src="sonido.mp3" type="audio/mp3">
+        Tu navegador no soporta el formato de audio.
+    </audio>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
         <script>
@@ -188,7 +192,10 @@ function generarPDF(nombre, asistentes) {
     imagenCargada.src = imagen.src;
 }
 
-
+   function reproducirSonido() {
+        const audio = document.getElementById('audio');
+        audio.play().catch(e => console.log('Error al reproducir el audio:', e));
+    }
         function crearBurbujas() {
             for (let i = 0; i < 50; i++) {
                 const burbuja = document.createElement('div');
