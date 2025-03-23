@@ -134,15 +134,15 @@ function generarPDF(nombre, asistentes) {
     const doc = new jsPDF();
 
     // Configurar los márgenes del PDF
+    const margenIzquierdo = 15; // Mantener margen izquierdo fijo
     const margenSuperior = 10;
-    const margenIzquierdo = (doc.internal.pageSize.width - 60) / 2; // Centrar la imagen en la página
-
+    
     // Agregar la imagen (se puede cargar desde una URL)
     const imagen = document.querySelector('.imagen-personalizada');
     const imagenCargada = new Image();
 
     imagenCargada.onload = function () {
-        // Agregar la imagen centrada
+        // Agregar la imagen
         const imagenAncho = 60;
         const imagenAlto = 60;
         doc.addImage(imagenCargada, 'WEBP', margenIzquierdo, margenSuperior, imagenAncho, imagenAlto);
@@ -187,6 +187,7 @@ function generarPDF(nombre, asistentes) {
     // Establecer la fuente de la imagen a cargar
     imagenCargada.src = imagen.src;
 }
+
 
         function crearBurbujas() {
             for (let i = 0; i < 50; i++) {
