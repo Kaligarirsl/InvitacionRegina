@@ -91,7 +91,20 @@
         <button class="boton" onclick="confirmarAsistencia()">Confirmar Asistencia</button>
         <p id="contador">Personas confirmadas: 0</p>
     </div>
-    
+    <audio id="audio" autoplay loop>
+    <source src="sonido.mp3" type="audio/mpeg">
+    Tu navegador no admite el elemento de audio.
+</audio>
+<script>
+    window.addEventListener('click', () => {
+        const audio = document.getElementById('audio');
+        if (audio.paused) {
+            audio.play().catch(error => console.error('Error al reproducir el audio:', error));
+        }
+    }, { once: true }); // Solo se ejecutará una vez
+</script>
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
         <script>
