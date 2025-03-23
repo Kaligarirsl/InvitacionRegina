@@ -139,44 +139,61 @@ function generarPDF(nombre, asistentes) {
 
     // Agregar la imagen (se puede cargar desde una URL)
     const imagen = document.querySelector('.imagen-personalizada');
-
-    // Asegurarnos de que la imagen esté cargada antes de agregarla al PDF
     const imagenCargada = new Image();
+
     imagenCargada.onload = function () {
-        // Agregar la imagen al PDF después de que se haya cargado
         doc.addImage(imagenCargada, 'WEBP', margenIzquierdo, margenSuperior, 60, 60);
 
-        // Título
+        // Fondo color amarillo claro para emular la invitación digital
+        doc.setFillColor(255, 243, 205);  // Color similar al fondo de la invitación
+        doc.rect(0, 0, 210, 297, 'F');  // Fondo con relleno
+
+        // Título con estilo mejorado
         doc.setFont("Helvetica", "bold");
-        doc.setFontSize(16);
+        doc.setFontSize(18);
+        doc.setTextColor(214, 139, 49);  // Color cálido similar al de la invitación
         doc.text("¡Estás Invitado al Baby Shower de Regina Sofía!", margenIzquierdo, 80);
 
-        // Datos de la invitación
+        // Crear borde decorativo alrededor del contenido
+        doc.setLineWidth(3);
+        doc.setDrawColor(249, 199, 79);  // Color dorado
+        doc.rect(margenIzquierdo - 5, 70, 200, 150);  // Rectángulo alrededor del contenido
+
+        // Datos de la invitación con color y estilo
         doc.setFont("Helvetica", "normal");
-        doc.setFontSize(12);
-        doc.text(`Nombre: ${nombre}`, margenIzquierdo, 90);
-        doc.text(`Número de Asistentes: ${asistentes}`, margenIzquierdo, 100);
+        doc.setFontSize(14);
+        doc.setTextColor(0, 0, 0);  // Color negro para el texto
+        doc.text(`Nombre: ${nombre}`, margenIzquierdo, 95);
+        doc.text(`Número de Asistentes: ${asistentes}`, margenIzquierdo, 105);
 
-        // Instrucciones
+        // Sección de instrucciones con numeración
         doc.setFontSize(12);
-        doc.text("Instrucciones para el día del evento:", margenIzquierdo, 110);
-        doc.text("1.- Los invitados pueden ingresar 15 min antes de las 13:00hrs", margenIzquierdo, 120);
-        doc.text("2.- La salida será máximo 20 min después de las 18:00hrs", margenIzquierdo, 130);
-        doc.text("3.- El estacionamiento tiene un costo de $60", margenIzquierdo, 140);
-        doc.text("4.- El acceso a los juegos es libre, así como a los inflables y mini campo de futbol", margenIzquierdo, 150);
+        doc.setTextColor(0, 0, 0);
+        doc.text("Instrucciones para el día del evento:", margenIzquierdo, 115);
+        doc.text("1. Los invitados pueden ingresar 15 min antes de las 13:00hrs", margenIzquierdo, 125);
+        doc.text("2. La salida será máximo 20 min después de las 18:00hrs", margenIzquierdo, 135);
+        doc.text("3. El estacionamiento tiene un costo de $60", margenIzquierdo, 145);
+        doc.text("4. El acceso a los juegos es libre, así como a los inflables y mini campo de futbol", margenIzquierdo, 155);
 
-        // Agregar los detalles de la invitación visualmente en el PDF
-        doc.text("Te esperamos el 18 de Mayo del 2025 de 13:00 a las 18:00 hrs.", margenIzquierdo, 160);
-        doc.text("Ubicación: Ver en Google Maps: https://maps.app.goo.gl/gx2aHk5RRhphrE239", margenIzquierdo, 170);
+        // Datos adicionales con fondo coloreado
+        doc.setFillColor(249, 199, 79);  // Color amarillo dorado para resaltar
+        doc.rect(margenIzquierdo - 5, 160, 200, 40, 'F');  // Fondo dorado
+        doc.setTextColor(0, 0, 0);  // Cambiar el texto a negro
+        doc.setFontSize(12);
+        doc.text("Te esperamos el 18 de Mayo del 2025 de 13:00 a las 18:00 hrs.", margenIzquierdo, 170);
+        doc.text("Ubicación: Ver en Google Maps: https://maps.app.goo.gl/gx2aHk5RRhphrE239", margenIzquierdo, 180);
+
+        // Agregar bordes decorativos adicionales (por ejemplo, en el área de instrucciones)
+        doc.setLineWidth(1);
+        doc.setDrawColor(214, 139, 49);  // Color cálido
+        doc.rect(margenIzquierdo - 5, 110, 200, 50);  // Borde alrededor de las instrucciones
 
         // Generar y descargar el PDF
         doc.save(`${nombre}_Invitacion_Baby_Shower.pdf`);
     };
 
-    // Establecer la URL de la imagen para que se cargue
     imagenCargada.src = imagen.src;
 }
-
 
         function crearBurbujas() {
             for (let i = 0; i < 50; i++) {
