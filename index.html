@@ -129,17 +129,22 @@
             }
         }
 
-      function generarPDF(nombre, asistentes) {
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
+     function generarPDF(nombre, asistentes) {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
 
-        // Configurar los márgenes del PDF
-        const margenIzquierdo = 15;
-        const margenSuperior = 10;
+    // Configurar los márgenes del PDF
+    const margenIzquierdo = 15;
+    const margenSuperior = 10;
 
-        // Agregar la imagen (se puede cargar desde una URL)
-        const imagen = document.querySelector('.imagen-personalizada');
-        doc.addImage(imagen.src, 'WEBP', margenIzquierdo, margenSuperior, 60, 60);
+    // Agregar la imagen (se puede cargar desde una URL)
+    const imagen = document.querySelector('.imagen-personalizada');
+
+    // Asegurarnos de que la imagen esté cargada antes de agregarla al PDF
+    const imagenCargada = new Image();
+    imagenCargada.onload = function () {
+        // Agregar la imagen al PDF después de que se haya cargado
+        doc.addImage(imagenCargada, 'WEBP', margenIzquierdo, margenSuperior, 60, 60);
 
         // Título
         doc.setFont("Helvetica", "bold");
@@ -149,9 +154,9 @@
         // Datos de la invitación
         doc.setFont("Helvetica", "normal");
         doc.setFontSize(12);
-        doc.text(Nombre: ${nombre}, margenIzquierdo, 90);
-        doc.text(Número de Asistentes: ${asistentes}, margenIzquierdo, 100);
-        
+        doc.text(`Nombre: ${nombre}`, margenIzquierdo, 90);
+        doc.text(`Número de Asistentes: ${asistentes}`, margenIzquierdo, 100);
+
         // Instrucciones
         doc.setFontSize(12);
         doc.text("Instrucciones para el día del evento:", margenIzquierdo, 110);
@@ -165,8 +170,12 @@
         doc.text("Ubicación: Ver en Google Maps: https://maps.app.goo.gl/gx2aHk5RRhphrE239", margenIzquierdo, 170);
 
         // Generar y descargar el PDF
-        doc.save(${nombre}_Invitacion_Baby_Shower.pdf);
-    }
+        doc.save(`${nombre}_Invitacion_Baby_Shower.pdf`);
+    };
+
+    // Establecer la URL de la imagen para que se cargue
+    imagenCargada.src = imagen.src;
+}
 
         function crearBurbujas() {
             for (let i = 0; i < 50; i++) {
