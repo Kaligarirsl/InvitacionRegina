@@ -91,7 +91,6 @@
         <button class="boton" onclick="confirmarAsistencia()">Confirmar Asistencia</button>
         <p id="contador">Personas confirmadas: 0</p>
     </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
         <script>
         let contador = 0;
@@ -128,7 +127,7 @@
             }
         }
 
-function generarPDF(nombre, asistentes) {
+      function generarPDF(nombre, asistentes) {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
 
@@ -186,6 +185,7 @@ function generarPDF(nombre, asistentes) {
     // Establecer la fuente de la imagen a cargar
     imagenCargada.src = imagen.src;
 }
+
         function crearBurbujas() {
             for (let i = 0; i < 50; i++) {
                 const burbuja = document.createElement('div');
