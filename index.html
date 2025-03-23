@@ -138,12 +138,11 @@ function generarPDF(nombre, asistentes) {
     const margenSuperior = 10;
 
     // Agregar la imagen (se puede cargar desde una URL)
-    const imagen = document.querySelector('.imagen-personalizada');
+  const imagen = document.querySelector('.imagen-personalizada');
     const imagenCargada = new Image();
 
     imagenCargada.onload = function () {
-        doc.addImage(imagenCargada, 'WEBP', margenIzquierdo, margenSuperior, 60, 60);
-
+         doc.addImage(imagenCargada, 'WEBP', margenIzquierdo, margenSuperior, 60, 60);
         // Fondo color amarillo claro para emular la invitación digital
         doc.setFillColor(255, 243, 205);  // Color similar al fondo de la invitación
         doc.rect(0, 0, 210, 297, 'F');  // Fondo con relleno
