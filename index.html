@@ -185,12 +185,12 @@
 // Sección de Itinerario como Línea del Tiempo
 doc.setFontSize(16);
 doc.setTextColor(0, 0, 0);
-doc.text("Itinerario:", margenIzquierdo, margenSuperior + imagenAlto + 50);
+doc.text("Itinerario:", margenIzquierdo, margenSuperior + imagenAlto + 120); // Cambiado el valor para que quede debajo de la ubicación
 
 // Línea principal del itinerario
 const xInicio = margenIzquierdo + 10;
 const xFin = xInicio + 70;
-const yBase = margenSuperior + imagenAlto + 60;
+const yBase = margenSuperior + imagenAlto + 130; 
 doc.setLineWidth(1.5);
 doc.setDrawColor(214, 139, 49); // Color cálido similar al título
 doc.line(xInicio, yBase, xFin, yBase); // Línea horizontal principal
