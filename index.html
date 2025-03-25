@@ -182,6 +182,42 @@
         doc.text("3. El estacionamiento tiene un costo de $60", margenIzquierdo, margenSuperior + imagenAlto + 80);
         doc.text("4. El acceso a los juegos es libre, así como a los inflables y mini campo de futbol", margenIzquierdo, margenSuperior + imagenAlto + 90);
 
+// Sección de Itinerario como Línea del Tiempo
+doc.setFontSize(16);
+doc.setTextColor(0, 0, 0);
+doc.text("Itinerario:", margenIzquierdo, margenSuperior + imagenAlto + 50);
+
+// Línea principal del itinerario
+const xInicio = margenIzquierdo + 10;
+const xFin = xInicio + 70;
+const yBase = margenSuperior + imagenAlto + 60;
+doc.setLineWidth(1.5);
+doc.setDrawColor(214, 139, 49); // Color cálido similar al título
+doc.line(xInicio, yBase, xFin, yBase); // Línea horizontal principal
+
+// Puntos y texto del itinerario
+const eventos = [
+    { hora: "13:00 - 15:00", texto: "Servicio de comida", offset: 0 },
+    { hora: "15:00 - 17:00", texto: "Actividades", offset: 20 },
+    { hora: "17:00 - 18:00", texto: "Pastel", offset: 40 }
+];
+
+eventos.forEach((evento, index) => {
+    const xPos = xInicio + (index * 35);
+
+    // Círculo de cada evento
+    doc.setFillColor(249, 199, 79);
+    doc.circle(xPos, yBase, 3, 'F');
+
+    // Hora del evento
+    doc.setFontSize(10);
+    doc.text(evento.hora, xPos - 15, yBase - 10);
+
+    // Descripción del evento
+    doc.text(evento.texto, xPos - 15, yBase + 10);
+});
+
+
         // Datos adicionales con un pequeño borde decorativo
         doc.setFontSize(12);
         doc.setTextColor(100, 100, 100);  // Gris suave
