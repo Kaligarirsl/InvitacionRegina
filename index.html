@@ -185,12 +185,13 @@
 // Sección de Itinerario como Línea del Tiempo
 doc.setFontSize(16);
 doc.setTextColor(0, 0, 0);
-doc.text("Itinerario:", margenIzquierdo, margenSuperior + imagenAlto + 120); // Ubicado debajo de la sección de ubicación
+doc.text("Itinerario:", 105, margenSuperior + imagenAlto + 120, { align: 'center' }); // Centrado
 
-// Línea principal del itinerario
-const xInicio = margenIzquierdo + 10;
-const xFin = xInicio + 70;
-const yBase = margenSuperior + imagenAlto + 140; // Línea base movida hacia abajo
+// Línea principal del itinerario (centrada)
+const xCentro = 105;  // Centro del PDF
+const xInicio = xCentro - 35;
+const xFin = xCentro + 35;
+const yBase = margenSuperior + imagenAlto + 140;
 doc.setLineWidth(1.5);
 doc.setDrawColor(214, 139, 49);
 doc.line(xInicio, yBase, xFin, yBase); // Línea horizontal principal
@@ -209,13 +210,24 @@ eventos.forEach((evento, index) => {
     doc.setFillColor(249, 199, 79);
     doc.circle(xPos, yBase, 3, 'F');
 
-    // Hora del evento
+    // Hora del evento (centrada)
     doc.setFontSize(10);
-    doc.text(evento.hora, xPos - 15, yBase - 10);
+    doc.text(evento.hora, xPos, yBase - 10, { align: 'center' });
 
-    // Descripción del evento
-    doc.text(evento.texto, xPos - 15, yBase + 10);
+    // Descripción del evento (centrada)
+    doc.text(evento.texto, xPos, yBase + 10, { align: 'center' });
 });
+
+// Datos adicionales centrados
+doc.setFontSize(12);
+doc.setTextColor(100, 100, 100);
+doc.text("Te esperamos el 18 de Mayo del 2025 de 13:00 a las 18:00 hrs.", 105, margenSuperior + imagenAlto + 100, { align: 'center' });
+doc.text("Ubicación: Ver en Google Maps: https://maps.app.goo.gl/gx2aHk5RRhphrE239", 105, margenSuperior + imagenAlto + 110, { align: 'center' });
+
+// Borde decorativo para mantener la estética
+doc.setLineWidth(2);
+doc.setDrawColor(249, 199, 79);
+doc.rect(10, 10, 190, 280);
 
         // Datos adicionales con un pequeño borde decorativo
         doc.setFontSize(12);
